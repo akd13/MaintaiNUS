@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/nus_login_background"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_width="295dp"
+        android:layout_height="30dp"
+        android:background="@drawable/round_corner"
+        android:id="@+id/userid"
+        android:layout_gravity="center_vertical"
+        android:hint="NUSNET Id"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:typeface="normal"
+        android:textColorHint="#969f150e"
+        android:textColor="#9f150e" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:background="@drawable/round_corner"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:hint="Password"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/userid"
+        android:layout_alignLeft="@+id/userid"
+        android:layout_alignStart="@+id/userid"
+        android:layout_alignRight="@+id/userid"
+        android:layout_alignEnd="@+id/userid"
+        android:typeface="normal"
+        android:textColorHint="#969f150e"
+        android:textColor="#9f150e" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:background="@drawable/round_corner"
+        android:text="Login"
+        android:id="@+id/loginButton"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:typeface="monospace"
+        android:backgroundTint="#9f150e"
+        android:layout_alignParentEnd="false"
+        android:textColor="#e4e4e4"
+        android:onClick="DummyLogin" />
+
+</RelativeLayout>
+
