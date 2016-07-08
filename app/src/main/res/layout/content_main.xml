@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.chandraanshugarg.maintainus.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:onClick="openForm">
 
     <Button
         android:layout_width="wrap_content"
@@ -31,4 +32,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/logoutButton"
         android:layout_alignEnd="@+id/logoutButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Complaint"
+        android:id="@+id/button2"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/logoutButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="openForm"/>
 </RelativeLayout>

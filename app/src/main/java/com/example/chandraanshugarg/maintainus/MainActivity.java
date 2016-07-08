@@ -46,5 +46,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void openForm(View v){
+        Intent intent=new Intent(this,ComplaintForm.class);
+        startActivity(intent);
+    }
 
 }
