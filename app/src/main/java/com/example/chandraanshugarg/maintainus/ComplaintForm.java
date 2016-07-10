@@ -1,30 +1,35 @@
 package com.example.chandraanshugarg.maintainus;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.database.sqlite.*;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class ComplaintForm extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    EditText causeInput;
+    EditText descInput;
+    myDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_form);
+        causeInput = (EditText) findViewById(R.id.CauseInput);
+       //causeText  = (TextView) findViewById(R.id.DescInput);
+       descInput = (EditText) findViewById(R.id.DescInput);
+        // descText  = (TextView) findViewById(R.id.descText);
+        dbHandler = new myDBHandler(this, null, null, 1);
+        printDatabase();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,6 +54,8 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
         dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter1);
 
+
+
         Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         spinner2.setOnItemSelectedListener(this);
         List<String> categories2 = new ArrayList<>();
@@ -62,6 +69,21 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(dataAdapter2);
 
+    }
+
+
+    public void printDatabase() {
+        String dbString = dbHandler.databasetoString();
+        causeInput.setText(dbString);
+        causeInput.setText("");
+        descInput.setText(dbString);
+        descInput.setText("");
+    }
+
+    public void SubmitButtonClick(View view) {
+        CauseDescription causedescription = new CauseDescription(causeInput.getText().toString(),descInput.getText().toString());
+        dbHandler.addCauseDesc(causedescription);
+        printDatabase();
     }
 
     @Override

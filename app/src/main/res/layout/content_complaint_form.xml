@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.chandraanshugarg.maintainus.ComplaintForm"
-    tools:showIn="@layout/activity_complaint_form">
+    tools:showIn="@layout/activity_complaint_form"
+    android:onClick="SubmitButtonClick">
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,10 +66,9 @@
         android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/DescInput"
         android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
+        android:layout_alignLeft="@+id/CauseInput"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -82,7 +78,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Cause:"
         android:id="@+id/textView4"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/DescInput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="38dp" />
@@ -92,11 +88,12 @@
         android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/CauseInput"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="CauseText" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -105,7 +102,7 @@
         android:id="@+id/checkBox"
 
         android:checked="false"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/CauseInput"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_marginTop="39dp"
@@ -115,9 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:id="@+id/button"
+        android:id="@+id/SubmitButtonClick"
         android:layout_below="@+id/checkBox"
         android:layout_centerHorizontal="true"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:onClick="SubmitButtonClick" />
 
 </RelativeLayout>
