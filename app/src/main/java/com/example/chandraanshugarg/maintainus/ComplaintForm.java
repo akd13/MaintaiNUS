@@ -8,12 +8,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ComplaintForm extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    String location, category, description, cause;
+    boolean occupant=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +65,32 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+       // Toast.makeText(parent.getContext(), "OnItemSelectedListener : " + parent.getItemAtPosition(position).toString(),
+                //Toast.LENGTH_SHORT).show();
+        if(parent.getItemAtPosition(0).toString()=="Tembusu College"){
+            location=parent.getItemAtPosition(position).toString();
+        }
+        else{
+            category=parent.getItemAtPosition(position).toString();
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    public  void checkboxClicked(View view){
+        occupant=((CheckBox) view).isChecked();
+    }
+    public void Submit(View view){
+        Toast.makeText(getApplicationContext(),location,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),category,Toast.LENGTH_SHORT).show();
+        EditText d=(EditText)findViewById(R.id.editText);
+        EditText c=(EditText)findViewById(R.id.editText2);
+        description=d.getText().toString();
+        cause=c.getText().toString();
+        Toast.makeText(getApplicationContext(),description,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),cause,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Occupant is "+occupant,Toast.LENGTH_SHORT).show();
     }
 }
