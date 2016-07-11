@@ -47,8 +47,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
     public void openForm(View v){
-        Intent intent=new Intent(this,ComplaintForm.class);
-        startActivity(intent);
+        if(!CheckConnection.isNetworkAvailable(MainActivity.this)){
+            Toast.makeText(getApplicationContext(), "Please Check Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(this, ComplaintForm.class);
+            startActivity(intent);
+        }
     }
 
 }

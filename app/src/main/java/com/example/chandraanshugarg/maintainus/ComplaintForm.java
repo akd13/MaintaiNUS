@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -82,9 +83,14 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void SubmitButtonClick(View view) {
-        CauseDescription causedescription = new CauseDescription(causeInput.getText().toString(),descInput.getText().toString());
-        dbHandler.addCauseDesc(causedescription);
-        printDatabase();
+        if(!CheckConnection.isNetworkAvailable(ComplaintForm.this)){
+            Toast.makeText(getApplicationContext(), "Please Check Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            CauseDescription causedescription = new CauseDescription(causeInput.getText().toString(), descInput.getText().toString());
+            dbHandler.addCauseDesc(causedescription);
+            printDatabase();
+        }
     }
 
     @Override
