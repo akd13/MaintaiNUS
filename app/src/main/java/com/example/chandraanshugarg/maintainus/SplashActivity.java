@@ -16,7 +16,12 @@ public class SplashActivity extends AppCompatActivity {
         final Thread timerThread = new Thread(){
             public void run(){
                 try{
-                    sleep(5000);
+                    if(pref.getBoolean("loggedIn",false)) {
+                        sleep(5000);
+                    }
+                    else{
+                        sleep(2500);
+                    }
                 }
                 catch(InterruptedException e){
                     e.printStackTrace();

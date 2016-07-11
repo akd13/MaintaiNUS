@@ -19,6 +19,7 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
     EditText causeInput;
     EditText descInput;
     myDBHandler dbHandler;
+    String location, category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,12 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        if(parent.getItemAtPosition(0)=="Tembusu College"){
+            location=parent.getItemAtPosition(position).toString();
+        }
+        else{
+            category=parent.getItemAtPosition(position).toString();
+        }
     }
 
     @Override
