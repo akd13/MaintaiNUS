@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+//        if(getIntent().getExtras().getString("success").equals("true")){
+//            Toast.makeText(getApplicationContext(), "Successfully Registered Complaint",Toast.LENGTH_SHORT).show();
+//        }
+//        if(getIntent().getExtras().getString("success").equals("false")){
+//            Toast.makeText(getApplicationContext(), "Error",Toast.LENGTH_SHORT).show();
+//        }
         TextView t1=(TextView)findViewById(R.id.username);
         SharedPreferences pref = getSharedPreferences("usernamePreference", MODE_PRIVATE);
         String temp=pref.getString("id","Guest");
+        username=temp;
         t1.setText(temp);
     }
     public void logout(View v){
@@ -52,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, ComplaintForm.class);
+            intent.putExtra("username",username);
             startActivity(intent);
         }
     }
