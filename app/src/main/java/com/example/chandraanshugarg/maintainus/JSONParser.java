@@ -36,7 +36,7 @@ public class JSONParser {
     }
 
     // function get json from url
-    // by making HTTP POST or GET mehtod
+    // by making HTTP POST or GET method
     public JSONObject makeHttpRequest(String url, String method,
                                       List<NameValuePair> params) {
 
@@ -56,7 +56,7 @@ public class JSONParser {
                 is = httpEntity.getContent();
                 outputString=convertStreamToString(is);
                 Log.d("Tag", " Is value: " + convertStreamToString(is) + " STATUS CODE" + httpResponse.getStatusLine().getStatusCode());///////////////////////////
-            }else if(method.equals("GET")){
+            }else if(method=="GET"){
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");
@@ -66,6 +66,8 @@ public class JSONParser {
                 HttpResponse httpResponse = httpClient.execute(httpGet);
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
+                outputString=convertStreamToString(is);
+                Log.d("Tag", " Is value: " + convertStreamToString(is) + " STATUS CODE" + httpResponse.getStatusLine().getStatusCode());///////////////////////////
             }
 
         } catch (UnsupportedEncodingException e) {

@@ -65,4 +65,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void updateForm(View v){
+      if(!CheckConnection.isNetworkAvailable(MainActivity.this)){
+            Toast.makeText(getApplicationContext(), "Please Check Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(this, EditComplaintForm.class);
+            intent.putExtra("username",username);
+            startActivity(intent);
+        }
+    }
+
 }

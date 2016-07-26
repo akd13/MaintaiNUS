@@ -20,13 +20,14 @@
         tools:ignore="HardcodedText"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
     <Spinner
         android:layout_width="250dp"
         android:layout_height="30dp"
         android:id="@+id/spinner1"
         android:spinnerMode="dropdown"
-        android:layout_alignBottom="@+id/textView"
+        android:layout_alignTop="@+id/textView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -37,19 +38,20 @@
         android:text="Category:"
         android:paddingTop="15dp"
         android:id="@+id/textView2"
+        tools:ignore="HardcodedText"
         android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        tools:ignore="HardcodedText" />
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginTop="40dp" />
 
     <Spinner
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner2"
-        android:layout_below="@+id/spinner1"
-        android:layout_alignLeft="@+id/spinner1"
-        android:layout_alignStart="@+id/spinner1"
-        android:paddingTop="18dp"/>
+        android:paddingTop="18dp"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"

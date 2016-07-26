@@ -37,6 +37,12 @@
             android:label="@string/title_activity_complaint_form"
             android:theme="@style/Theme.Design.NoActionBar" >
         </activity>
+        <activity
+            android:name=".EditComplaintForm"
+            android:label="Edit Complaint"
+            android:theme="@style/Theme.Design.NoActionBar" >
+        </activity>
+
     </application>
 
 </manifest>
