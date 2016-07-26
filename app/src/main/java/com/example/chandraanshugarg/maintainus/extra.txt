@@ -1,0 +1,140 @@
+        name_of_user=getIntent().getExtras().getString("username");
+        location = txtLocation.getText().toString();
+        category = txtCategory.getText().toString();
+        description = txtDesc.getText().toString();
+        cause = txtCause.getText().toString();
+
+ /**
+     * Background Async Task to  Save product Details
+     * */
+    class SaveComplaintDetails extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(EditComplaintForm.this);
+            pDialog.setMessage("Saving complaint ...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Saving product
+         * */
+        protected String doInBackground(String... args) {
+
+
+            // Building Parameters
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair(TAG_PID, pid));
+            params.add(new BasicNameValuePair(TAG_NAME_OF_USER, "default"));
+            params.add(new BasicNameValuePair(TAG_LOCATION, location));
+            params.add(new BasicNameValuePair(TAG_CATEGORY, category));
+            params.add(new BasicNameValuePair(TAG_CAUSE, cause));
+            params.add(new BasicNameValuePair(TAG_DESCRIPTION, description));
+            params.add(new BasicNameValuePair(TAG_OCCUPANT, "true"));
+
+            // sending modified data through http request
+            // Notice that update product url accepts POST method
+            JSONObject json = jsonParser.makeHttpRequest(url_update_complaint,
+                    "POST", params);
+
+            // check json success tag
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully updated
+                    Intent i = getIntent();
+                    // send result code 100 to notify about product update
+                    setResult(100, i);
+                    finish();
+                } else {
+                    // failed to update product
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product uupdated
+            pDialog.dismiss();
+        }
+    }
+
+    /*****************************************************************
+     * Background Async Task to Delete Product
+     * */
+    class DeleteComplaint extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         * */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(EditComplaintForm.this);
+            pDialog.setMessage("Deleting Complaint...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Deleting product
+         * */
+        protected String doInBackground(String... args) {
+
+            // Check for success tag
+            int success;
+            try {
+                // Building Parameters
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("pid", pid));
+
+                // getting product details by making HTTP request
+                JSONObject json = jsonParser.makeHttpRequest(
+                        url_delete_complaint, "POST", params);
+
+                // check your log for json response
+                Log.d("Delete Complaint", json.toString());
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // product successfully deleted
+                    // notify previous activity by sending code 100
+                    Intent i = getIntent();
+                    // send result code 100 to notify about product deletion
+                    setResult(100, i);
+                    finish();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * **/
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+
+        }
+
+    }
+
+// Building Parameters
