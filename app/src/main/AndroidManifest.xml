@@ -33,6 +33,10 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
+            android:name=".ViewComplaints"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
             android:name=".ComplaintForm"
             android:label="@string/title_activity_complaint_form"
             android:theme="@style/Theme.Design.NoActionBar" >

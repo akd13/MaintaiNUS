@@ -46,13 +46,13 @@ public class EditComplaintForm extends AppCompatActivity {
     JSONParser jsonParser = new JSONParser();
 
     // single complaint url
-    private static final String url_complaint_details = "http://192.168.1.7/maintainus/read_complaint.php";
+    private static final String url_complaint_details = "http://192.168.1.106/maintaiNUS/read_complaint.php";
 
     // url to update complaint
-    private static final String url_update_complaint = "http://192.168.1.7/maintainus/update_complaint.php";
+    private static final String url_update_complaint = "http://192.168.1.106/maintaiNUS/update_complaint.php";
 
     // url to delete complaint
-    private static final String url_delete_complaint = "http://192.168.1.7/maintainus/delete_complaint.php";
+    private static final String url_delete_complaint = "http://192.168.1.106/maintaiNUS/delete_complaint.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
