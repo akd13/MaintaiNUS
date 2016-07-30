@@ -31,6 +31,7 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
 
     <LinearLayout
@@ -100,9 +101,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:id="@+id/occupant"/>
+            android:id="@+id/repair_time"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -118,10 +120,6 @@
             android:layout_height="wrap_content"
             android:text="Delete"
             android:paddingRight="10dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Status"/>
     </LinearLayout>
 
 </LinearLayout>
