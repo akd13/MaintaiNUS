@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:text="Delete"
             android:paddingRight="10dp"
-            android:id="@+id/delete"/>
+            android:id="@+id/delete" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

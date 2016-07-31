@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 public class EditComplaintForm extends AppCompatActivity {
 
-    public String name_of_user,location, category, cause, description, occupant;
+    public String name_of_user,location, category, cause, description, occupant,time_of_complaint;
     boolean successful;
 
     EditText txtLocation;
@@ -100,7 +100,7 @@ public class EditComplaintForm extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // deleting complaint in background thread
-                new DeleteComplaint().execute();
+                new DeleteComplaintTemp().execute();
            }
         });
 
@@ -273,7 +273,7 @@ public class EditComplaintForm extends AppCompatActivity {
     /*****************************************************************
      * Background Async Task to Delete Product
      * */
-    class DeleteComplaint extends AsyncTask<String, String, String> {
+    class DeleteComplaintTemp extends AsyncTask<String, String, String> {
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -298,11 +298,11 @@ public class EditComplaintForm extends AppCompatActivity {
             try {
                 // Building Parameters
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("pid", pid));
+                params.add(new BasicNameValuePair("name_of_user", name_of_user));
+                params.add(new BasicNameValuePair("time_of_complaint", time_of_complaint));
 
                 // getting product details by making HTTP request
-                JSONObject json = jsonParser.makeHttpRequest(
-                        url_delete_complaint, "POST", params);
+                JSONObject json = jsonParser.makeHttpRequest(url_delete_complaint, "POST", params);
 
                 // check your log for json response
                 Log.d("Delete Complaint", json.toString());

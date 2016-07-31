@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +35,7 @@ import org.apache.http.ParseException;
  */
 public class ViewComplaints extends ListActivity{
     private ProgressDialog pDialog;
-    String username;
+    String username, time_of_complaint;
 
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
@@ -42,6 +43,7 @@ public class ViewComplaints extends ListActivity{
     ArrayList<HashMap<String, String>> complaintsList;
 
     private static String url_all_complaints = "http://192.168.1.7/maintaiNUS/read_complaint.php";
+    private static String url_delete_complaints = "http://192.168.1.7/maintaiNUS/delete_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -77,6 +79,8 @@ public class ViewComplaints extends ListActivity{
 //            }
 //        });
     }
+
+
     class LoadAllComplaints extends AsyncTask<String, String, String> {
 
         /**
@@ -117,6 +121,13 @@ public class ViewComplaints extends ListActivity{
 
                         if(repairs.equals("null"))
                         { repairs = "COMPLAINT REGISTERED"; }
+
+                        DateFormat formatter = new SimpleDateFormat("yyyy-mm-DD");
+                        try {Date date = (Date)formatter.parse(repairs);
+                            SimpleDateFormat newFormat = new SimpleDateFormat("DD/mm/yyyy");
+                           repairs = newFormat.format(date);}
+                        catch(java.text.ParseException e) {}
+
 
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -174,4 +185,7 @@ public class ViewComplaints extends ListActivity{
         intent.putExtra("time", childTime.getText().toString());
         startActivity(intent);
     }
+
+
+
 }
