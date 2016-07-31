@@ -10,5 +10,6 @@
     <!--<string name="hostel_6">UTown Residences</string>-->
     <string name="title_activity_logout_page">LogoutPage</string>
     <string name="title_activity_complaint_form">ComplaintForm</string>
-    
+    <string name="title_activity_update_form">UpdateForm</string>
+
 </resources>

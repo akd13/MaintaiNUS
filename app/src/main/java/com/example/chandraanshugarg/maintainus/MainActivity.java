@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, ViewComplaints.class);
+            intent.putExtra("username",username);
             startActivity(intent);
         }
     }

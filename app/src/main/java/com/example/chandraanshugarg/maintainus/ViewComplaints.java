@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -29,13 +30,14 @@ import android.widget.Toast;
  */
 public class ViewComplaints extends ListActivity{
     private ProgressDialog pDialog;
+    String username;
 
     // Creating JSON Parser object
     JSONParser jParser = new JSONParser();
 
     ArrayList<HashMap<String, String>> complaintsList;
 
-    private static String url_all_complaints = "http://192.168.1.106/maintaiNUS/read_complaint.php";
+    private static String url_all_complaints = "http://192.168.1.102/maintaiNUS/read_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -49,6 +51,7 @@ public class ViewComplaints extends ListActivity{
 
     JSONArray complaints = null;
     public void onCreate(Bundle savedInstanceState) {
+        username=getIntent().getStringExtra("username");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_complaints);
         complaintsList = new ArrayList<HashMap<String, String>>();
@@ -58,6 +61,16 @@ public class ViewComplaints extends ListActivity{
 
         // Get listview
         ListView lv = getListView();
+
+//        lv.findViewById(R.id.update).setOnItemClickListener(new OnItemClickListener(){
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String desc, cause;
+//                desc=((TextView) view.findViewById(R.id.description)).getText().toString();
+//                cause=((TextView) view.findViewById(R.id.cause)).getText().toString();
+//                Log.d("cause and desc", desc+cause);
+//            }
+//        });
     }
     class LoadAllComplaints extends AsyncTask<String, String, String> {
 
@@ -129,8 +142,8 @@ public class ViewComplaints extends ListActivity{
                      * */
                     ListAdapter adapter = new SimpleAdapter(
                             ViewComplaints.this, complaintsList,
-                            R.layout.complaint_item, new String[] { TAG_CATEGORY,TAG_CAUSE, TAG_DESCRIPTION, TAG_LOCATION, TAG_OCCUPANT, TAG_TIME, TAG_USER},
-                            new int[] { R.id.category, R.id.cause, R.id.description, R.id.location, R.id.occupant, R.id.time_of_complaint, R.id.user });
+                            R.layout.complaint_item, new String[] { TAG_CATEGORY,TAG_CAUSE, TAG_DESCRIPTION, TAG_LOCATION, TAG_OCCUPANT, TAG_TIME, TAG_USER, TAG_DESCRIPTION, TAG_CAUSE, TAG_TIME},
+                            new int[] { R.id.category, R.id.cause, R.id.description, R.id.location, R.id.occupant, R.id.time_of_complaint, R.id.user, R.id.dummyDesc, R.id.dummyCause, R.id.dummyTime });
                     // updating listview
                     setListAdapter(adapter);
                 }
@@ -138,5 +151,18 @@ public class ViewComplaints extends ListActivity{
 
         }
 
+    }
+    public void updateHandler(View v){
+        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+        TextView childDesc = (TextView)vwParentRow.getChildAt(2);
+        TextView childCause = (TextView)vwParentRow.getChildAt(3);
+        TextView childTime = (TextView)vwParentRow.getChildAt(4);
+        Log.d("cause and desc", childCause.getText().toString()+ "   " +childDesc.getText().toString()+ childTime.getText().toString());
+        Intent intent = new Intent(ViewComplaints.this,UpdateForm.class);
+        intent.putExtra("cause",childCause.getText().toString());
+        intent.putExtra("desc",childDesc.getText().toString());
+        intent.putExtra("username",username);
+        intent.putExtra("time", childTime.getText().toString());
+        startActivity(intent);
     }
 }
