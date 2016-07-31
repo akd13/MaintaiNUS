@@ -38,7 +38,7 @@ public class UpdateForm extends AppCompatActivity {
     boolean successful;
     private ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser();
-    private static String url_update_complaint = "http://192.168.1.7/maintaiNUS/update_complaint.php";///////////////////IMPORTANT/////////
+    private static String url_update_complaint = "http://192.168.1.105/maintaiNUS/update_complaint.php";///////////////////IMPORTANT/////////
     private static final String TAG_SUCCESS = "success";
     EditText newCause;
     EditText newDesc;

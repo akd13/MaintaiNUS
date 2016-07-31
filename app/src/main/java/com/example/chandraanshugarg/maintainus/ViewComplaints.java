@@ -42,8 +42,8 @@ public class ViewComplaints extends ListActivity{
 
     ArrayList<HashMap<String, String>> complaintsList;
 
-    private static String url_all_complaints = "http://192.168.1.7/maintaiNUS/read_complaint.php";
-    private static String url_delete_complaints = "http://192.168.1.7/maintaiNUS/delete_complaint.php";
+    private static String url_all_complaints = "http://192.168.1.105/maintaiNUS/read_complaint.php";
+    private static String url_delete_complaints = "http://192.168.1.105/maintaiNUS/delete_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -185,7 +185,66 @@ public class ViewComplaints extends ListActivity{
         intent.putExtra("time", childTime.getText().toString());
         startActivity(intent);
     }
+    public void deleteHandler(View v) {
+        LinearLayout vwParentRow = (LinearLayout) v.getParent();
+        TextView childTime = (TextView) vwParentRow.getChildAt(4);
+        time_of_complaint = childTime.getText().toString();
+        if (!CheckConnection.isNetworkAvailable(ViewComplaints.this)) {
+            Toast.makeText(getApplicationContext(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+        } else {
+            new DeleteComplaint().execute();
+        }
+    }
+    class DeleteComplaint extends AsyncTask<String, String, String> {
+        boolean successful;
 
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(ViewComplaints.this);
+            pDialog.setMessage("Deleting Complaint");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            // pDialog.show();
+        }
 
+        protected String doInBackground(String... args) {
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("name_of_user", username));
+            params.add(new BasicNameValuePair("time_of_complaint", time_of_complaint));
+            JSONObject json1 = jParser.makeHttpRequest(url_delete_complaints, "POST", params);
+            Log.d("Update Response", json1.toString());
 
+            try {
+                int success = json1.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    // successfully created product
+                    successful = true;
+                    finish();
+                } else {
+                    // failed to create product
+                    //Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    successful = false;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            if (successful) {
+                Toast.makeText(getApplicationContext(), "Complaint Successfully Deleted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "An Error Occurred", Toast.LENGTH_SHORT).show();
+            }
+            pDialog.dismiss();
+        }
+    }
 }
