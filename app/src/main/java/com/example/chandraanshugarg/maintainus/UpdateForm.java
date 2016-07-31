@@ -34,12 +34,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class UpdateForm extends AppCompatActivity {
-    String c, d, name_of_user, time_of_complaint;
+    public String c, d, name_of_user, time_of_complaint;
     boolean successful;
     private ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser();
-    private static String url_update_complaint = "http://192.168.1.102/maintaiNUS/update_complaint.php";///////////////////IMPORTANT/////////
+    private static String url_update_complaint = "http://192.168.1.7/maintaiNUS/update_complaint.php";///////////////////IMPORTANT/////////
     private static final String TAG_SUCCESS = "success";
+    EditText newCause;
+    EditText newDesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,14 @@ public class UpdateForm extends AppCompatActivity {
         EditText EditDesc=(EditText)findViewById(R.id.UpdateDesc);
         EditCause.setText(cause);
         EditDesc.setText(description);
-        c=cause;
-        d=description;
+        newCause = (EditText) findViewById(R.id.UpdateCause);
+        newDesc =  (EditText) findViewById(R.id.UpdateDesc);
+
+        c = newCause.getText().toString();
+        d = newDesc.getText().toString();
+
         name_of_user=getIntent().getStringExtra("username");
         time_of_complaint=getIntent().getStringExtra("time");
-        Log.d("time", time_of_complaint);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +78,8 @@ public class UpdateForm extends AppCompatActivity {
         if (!CheckConnection.isNetworkAvailable(UpdateForm.this)) {
             Toast.makeText(getApplicationContext(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
         } else {
+            c = newCause.getText().toString();
+            d = newDesc.getText().toString();
             new UpdateComplaint().execute();
         }
     }
@@ -94,6 +101,8 @@ public class UpdateForm extends AppCompatActivity {
         protected String doInBackground(String... args) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("name_of_user", name_of_user));
+            Log.d("Description updated",d);
+            Log.d("Cause updated",c);
             params.add(new BasicNameValuePair("description", d));
             params.add(new BasicNameValuePair("cause", c));
             params.add(new BasicNameValuePair("time_of_complaint", time_of_complaint));
