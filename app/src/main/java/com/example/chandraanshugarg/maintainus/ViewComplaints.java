@@ -41,7 +41,7 @@ public class ViewComplaints extends ListActivity{
 
     ArrayList<HashMap<String, String>> complaintsList;
 
-    private static String url_all_complaints = "http://192.168.1.106/maintaiNUS/read_complaint.php";
+    private static String url_all_complaints = "http://192.168.1.7/maintaiNUS/read_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -151,8 +151,8 @@ public class ViewComplaints extends ListActivity{
                      * */
                     ListAdapter adapter = new SimpleAdapter(
                             ViewComplaints.this, complaintsList,
-                            R.layout.complaint_item, new String[] { TAG_CATEGORY,TAG_CAUSE, TAG_DESCRIPTION, TAG_LOCATION, TAG_OCCUPANT, TAG_TIME, TAG_USER, TAG_DESCRIPTION, TAG_CAUSE, TAG_TIME},
-                            new int[] { R.id.category, R.id.cause, R.id.description, R.id.location, R.id.occupant, R.id.time_of_complaint, R.id.user, R.id.dummyDesc, R.id.dummyCause, R.id.dummyTime });
+                            R.layout.complaint_item, new String[] { TAG_CATEGORY,TAG_CAUSE, TAG_DESCRIPTION, TAG_LOCATION, TAG_REPAIR, TAG_TIME, TAG_USER, TAG_DESCRIPTION, TAG_CAUSE, TAG_TIME},
+                            new int[] { R.id.category, R.id.cause, R.id.description, R.id.location, R.id.repair_time, R.id.time_of_complaint, R.id.user, R.id.dummyDesc, R.id.dummyCause, R.id.dummyTime });
                     // updating listview
                     setListAdapter(adapter);
                 }
