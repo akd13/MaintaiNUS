@@ -24,6 +24,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
+import org.apache.http.ParseException;
 
 /**
  * Created by Chandraanshu Garg on 28-07-2016.
@@ -37,7 +41,7 @@ public class ViewComplaints extends ListActivity{
 
     ArrayList<HashMap<String, String>> complaintsList;
 
-    private static String url_all_complaints = "http://192.168.1.102/maintaiNUS/read_complaint.php";
+    private static String url_all_complaints = "http://192.168.1.106/maintaiNUS/read_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -47,7 +51,8 @@ public class ViewComplaints extends ListActivity{
     private static final String TAG_CATEGORY = "category";
     private static final String TAG_CAUSE = "cause";
     private static final String TAG_DESCRIPTION = "description";
-    private static final String TAG_OCCUPANT = "occupant";
+    private static final String TAG_REPAIR = "repair_time";
+
 
     JSONArray complaints = null;
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +113,10 @@ public class ViewComplaints extends ListActivity{
                         String location = c.getString(TAG_LOCATION);
                         String cause = c.getString(TAG_CAUSE);
                         String description = c.getString(TAG_DESCRIPTION);
-                        String occupant = c.getString(TAG_OCCUPANT);
+                        String repairs = c.getString(TAG_REPAIR);
+
+                        if(repairs.equals("null"))
+                        { repairs = "COMPLAINT REGISTERED"; }
 
                         HashMap<String, String> map = new HashMap<String, String>();
 
@@ -118,7 +126,8 @@ public class ViewComplaints extends ListActivity{
                         map.put(TAG_LOCATION, location);
                         map.put(TAG_CAUSE, cause);
                         map.put(TAG_DESCRIPTION, description);
-                        map.put(TAG_OCCUPANT, occupant);
+                        map.put(TAG_REPAIR, repairs);
+
 
                         complaintsList.add(map);
                     }

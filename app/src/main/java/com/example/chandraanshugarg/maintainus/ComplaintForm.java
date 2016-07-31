@@ -46,7 +46,7 @@ public class ComplaintForm extends AppCompatActivity implements AdapterView.OnIt
     String name_of_user;
 
     JSONParser jsonParser = new JSONParser();
-    private static String url_create_complaint = "http://192.168.1.102/maintaiNUS/create_test.php";///////////////////IMPORTANT/////////
+    private static String url_create_complaint = "http://192.168.1.106/maintaiNUS/create_test.php";///////////////////IMPORTANT/////////
     private static final String TAG_SUCCESS = "success";
 
     @Override
