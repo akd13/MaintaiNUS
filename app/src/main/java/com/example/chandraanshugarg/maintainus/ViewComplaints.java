@@ -42,8 +42,8 @@ public class ViewComplaints extends ListActivity{
 
     ArrayList<HashMap<String, String>> complaintsList;
 
-    private static String url_all_complaints = "http://192.168.1.105/maintaiNUS/read_complaint.php";
-    private static String url_delete_complaints = "http://192.168.1.105/maintaiNUS/delete_complaint.php";
+    private static String url_all_complaints = "http://104.155.213.115/read_complaint.php";
+    private static String url_delete_complaints = "http://104.155.213.115/delete_complaint.php";
 
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_COMPLAINTS = "complaints";
@@ -99,6 +99,7 @@ public class ViewComplaints extends ListActivity{
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("name_of_user", username));
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_complaints, "GET", params);
             Log.d("All Products: ", json.toString());
@@ -106,6 +107,7 @@ public class ViewComplaints extends ListActivity{
             try {
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
+
 
                 if (success == 1) {
                     complaints = json.getJSONArray(TAG_COMPLAINTS);
@@ -120,12 +122,12 @@ public class ViewComplaints extends ListActivity{
                         String repairs = c.getString(TAG_REPAIR);
 
                         if(repairs.equals("null"))
-                        { repairs = "COMPLAINT REGISTERED"; }
+                        { repairs = "Complaint Registered"; }
 
                         DateFormat formatter = new SimpleDateFormat("yyyy-mm-DD");
                         try {Date date = (Date)formatter.parse(repairs);
                             SimpleDateFormat newFormat = new SimpleDateFormat("DD/mm/yyyy");
-                           repairs = newFormat.format(date);}
+                           repairs = "Repair on " + newFormat.format(date);}
                         catch(java.text.ParseException e) {}
 
 
